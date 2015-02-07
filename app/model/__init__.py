@@ -4,6 +4,7 @@ import sae.const
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import DateTime, Column, func
 
+
 db_link = 'mysql+mysqldb://' + sae.const.MYSQL_USER + ':' + sae.const.MYSQL_PASS + '@' + sae.const.MYSQL_HOST + ':' + \
           sae.const.MYSQL_PORT + '/' + sae.const.MYSQL_DB + '?charset=utf8'
 
