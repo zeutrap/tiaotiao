@@ -4,6 +4,7 @@ from app.model import db_session
 from app.model.feed import FeedRecord
 from sqlalchemy import desc
 from datetime import datetime
+from forms import FeedForm
 
 
 feed_page = Blueprint('feed_page', __name__)
@@ -25,3 +26,16 @@ def delete_feed(feed_id):
     db_session.commit()
     return redirect(url_for('.feed'))
 
+@feed_page.route('/feed/edit/<int:feed_id>', methods=("POST", "GET"))
+def edit_feed(feed_id):
+    record = FeedRecord.query.filter(FeedRecord.id == feed_id).first()
+    feed_form = FeedForm(request.form, record)
+    if request.method == 'POST':
+        feed_form.populate_obj(record)
+        if 'key' in request.form:
+            record.quant = int(request.form['key'])
+            db_session.add(record)
+            db_session.commit()
+        return redirect(url_for('.feed'))
+    else:
+        return render_template('feed/edit.html', feed_form=feed_form)
