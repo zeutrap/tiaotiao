@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, request, redirect, url_for
-from model import db_session
-from model.feed import FeedRecord
+from app.model import db_session
+from app.model.feed import FeedRecord
+from sqlalchemy import desc
 from datetime import datetime
 
 
@@ -15,7 +16,7 @@ def feed():
         db_session.commit()
         return redirect(url_for('.feed'))
 
-    feeds = FeedRecord.query.all()
+    feeds = FeedRecord.query.order_by(desc(FeedRecord.id)).all()
     return render_template('/feed/feed.html',  feeds = feeds)
 
 @feed_page.route('/feed/delete/<int:feed_id>')

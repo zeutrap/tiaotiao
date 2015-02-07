@@ -3,7 +3,7 @@ from flask import Flask, render_template, session, g
 from flask.ext.bootstrap import Bootstrap
 from app.index.view import index_page
 from app.feed.view import feed_page
-from model import db_session
+from app.model import db_session
 
 
 bootstrap = Bootstrap()

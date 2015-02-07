@@ -2,7 +2,7 @@
 
 
 from datetime import datetime
-from model import db
+from app.model import db
 
 class FeedRecord(db.Model):
 	__tablename__ = 'feeds'
