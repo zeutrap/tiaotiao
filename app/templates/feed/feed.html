@@ -1,0 +1,32 @@
+{% extends "/layout/base.html" %}
+
+{% block page_content %}
+<div class="page-header"> 
+<h2> 要吃饭了 </h2>
+<form role="form" method="post">
+<div class="btn-group btn-block">
+<button type="submit" class="btn btn-default btn-lg"name="key" value="30" >喂30毫升</button>
+<button type="submit" class="btn btn-default btn-lg"name="key" value="60" >喂60毫升</button>
+<button type="submit" class="btn btn-default btn-lg"name="key" value="90" >喂90毫升</button>
+<button type="submit" class="btn btn-default btn-lg"name="key" value="120" >喂120毫升</button>
+<button type="submit" class="btn btn-default btn-lg"name="key" value="0" >喂母乳</button>
+</div>
+</form>
+</div>
+
+<div class="page-header"> 
+<h2> 吃饭记录 </h2>
+<table class="table table-bordered table-condensed .table-condensed " align = "center">
+<tr> <th>时间</th> <th>饭量</th> <th>操作</th>
+</tr>
+{% for feed in feeds %}
+	<tr>
+		<td>{{feed.time}}</td> <td>{{feed.quant}}</td>
+		<td align = "justify">
+			<a type="button" class="btn btn-sm btn-danger btn-block" href="delete/{{feed.id}}">删除记录</a> 
+		</td> 
+	</tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}
