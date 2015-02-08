@@ -47,29 +47,30 @@ app.register_blueprint(feed_page)
 # error handler
 @app.errorhandler(404)
 def page_not_found(error):
-	"""
-	404 page not found
-	"""
-	return render_template('404.html'), 404
+    """
+    404 page not found
+    """
+    print '404'
+    return render_template('404.html'), 404
 
 
 @app.before_request
 def before_request():
-	"""
-	before request
-	"""
-	if 'is_admin' in session:
-		g.is_admin = 1
-	else:
-		g.is_admin = None
+    """
+    before request
+    """
+    if 'is_admin' in session:
+        g.is_admin = 1
+    else:
+        g.is_admin = None
 
 
 @app.teardown_request
 def shutdown_session(exception=None):
-	"""
-	teardown request
-	"""
-	db_session.rollback()
-	db_session.close()
+    """
+    teardown request
+    """
+    db_session.rollback()
+    db_session.close()
 
 
