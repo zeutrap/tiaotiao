@@ -18,7 +18,7 @@ def feed():
         db_session.commit()
         return redirect(url_for('.feed'))
 
-    feeds = FeedRecord.query.order_by(desc(FeedRecord.id)).all()
+    feeds = FeedRecord.query.order_by(desc(FeedRecord.time)).all()
     return render_template('/feed/feed.html',  feeds = feeds)
 
 @feed_page.route('/feed/delete/<int:feed_id>')
